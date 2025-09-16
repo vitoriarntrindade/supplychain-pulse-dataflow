@@ -1,0 +1,41 @@
+[project]
+name = "data-market-etl"
+version = "1"
+description = "Projeto para aprofudamento em engenharia de dados e backend."
+authors = [
+    {name = "Your Name",email = "you@example.com"}
+]
+readme = "README.md"
+dependencies = [
+]
+
+[tool.poetry.dependencies]
+python = ">=3.12,<3.13"
+
+
+
+[build-system]
+requires = ["poetry-core>=2.0.0,<3.0.0"]
+build-backend = "poetry.core.masonry.api"
+
+[dependency-groups]
+dev = [
+    "ruff (>=0.13.0,<0.14.0)",
+    "taskipy (>=1.14.1,<2.0.0)",
+    "pytest (>=8.4.2,<9.0.0)"
+]
+
+
+[tool.taskipy.tasks]
+lint = "ruff check ."
+format = "ruff format ."
+test = "pytest tests/"
+pre_test = "task lint"
+
+
+[tool.ruff]
+line-length = 79
+target-version = "py312"
+include = ["src", "tests"]
+fix = true
+show-fixes = true

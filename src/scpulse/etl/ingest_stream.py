@@ -29,9 +29,6 @@ def _write_parquet(
 
     df = pl.DataFrame(events)
 
-    # Garante que timestamp esteja timezone-aware
-    #            .fill_null(datetime.now(UTC))   # substitui nulos por agora
-
     if "timestamp" in df.columns:
         df = df.with_columns(
             pl.col("timestamp")

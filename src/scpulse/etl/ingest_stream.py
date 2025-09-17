@@ -29,7 +29,6 @@ def _write_parquet(
 
     df = pl.DataFrame(events)
 
-
     if "timestamp" in df.columns:
         df = df.with_columns(
             pl.col("timestamp")

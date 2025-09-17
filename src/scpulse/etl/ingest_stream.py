@@ -29,16 +29,19 @@ def _write_parquet(
 
     df = pl.DataFrame(events)
 
-    # Garante que timestamp esteja timezone-aware
 
     if "timestamp" in df.columns:
         df = df.with_columns(
             pl.col("timestamp")
             .str.strptime(
-                pl.Datetime("ns"), "%Y-%m-%dT%H:%M:%SZ", strict=False
+                pl.Datetime("ns"),
+                "%Y-%m-%dT%H:%M:%S%.f%z",
+                strict=True,  # suporta +00:00
             )
-            .dt.replace_time_zone("UTC")
+            .dt.convert_time_zone("UTC")  # normaliza para UTC
         )
+
+    print(df["timestamp"].head())
 
     file_path = DATA_DIR / filename
     df.write_parquet(file_path, compression="snappy")

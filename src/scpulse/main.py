@@ -1,11 +1,13 @@
 from fastapi import FastAPI
-from scpulse.api.routes import health
+from src.scpulse.api.routes import orders, inventory, suppliers
 
-app = FastAPI(
-    title="SupplyChain Pulse",
-    description="API de monitoramento logístico em tempo real",
-    version="0.1.0",
-)
+app = FastAPI(title="SupplyChain Pulse API")
 
-# Registro das rotas
-app.include_router(health.router, prefix="/api")
+app.include_router(orders.router)
+app.include_router(inventory.router)
+app.include_router(suppliers.router)
+
+
+@app.get("/health")
+def healthcheck() -> dict[str, str]:
+    return {"status": "ok"}

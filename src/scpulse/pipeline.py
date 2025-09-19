@@ -60,7 +60,7 @@ def run_transform() -> None:
             continue
 
 
-async def scheduler(interval: int = 60) -> None:
+async def scheduler(interval: int = 5) -> None:
     """Agenda transformações periódicas Bronze→Silver→Gold.
 
     Args:

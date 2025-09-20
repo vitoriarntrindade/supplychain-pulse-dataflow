@@ -17,7 +17,7 @@ class Base(DeclarativeBase):
     """Classe base para models SQLAlchemy."""
 
 
-engine = create_engine(DATABASE_URL, echo=False, future=True)
+engine = create_engine(DATABASE_URL, echo=True, future=True)
 SessionLocal = sessionmaker(bind=engine, autoflush=False, autocommit=False)
 
 

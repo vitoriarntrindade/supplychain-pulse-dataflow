@@ -46,12 +46,16 @@ def bronze_to_silver(input_path: Path, output_path: Path) -> None:
         )
 
     # 🔹 Deduplicação + tipagem final
-    df = df.unique().cast(
-        {
-            "event_id": pl.Utf8,
-            "event_type": pl.Utf8,
-            "timestamp": pl.Datetime("ns", "UTC"),
-        }
+    df = (
+        df.unique()
+        .cast(
+            {
+                "event_id": pl.Utf8,
+                "event_type": pl.Utf8,
+                "timestamp": pl.Datetime("ns", "UTC"),
+            }
+        )
+        .with_columns(pl.col("timestamp").dt.date().alias("date"))
     )
 
     df.write_parquet(output_path, compression="snappy")

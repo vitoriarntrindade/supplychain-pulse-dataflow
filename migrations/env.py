@@ -1,12 +1,8 @@
-import os
 from logging.config import fileConfig
 
 from sqlalchemy import engine_from_config
 from sqlalchemy import pool
 from src.scpulse.storage.postgres import Base
-# type: ignore
-
-from alembic import context
 
 # this is the Alembic Config object, which provides
 # access to the values within the .ini file in use.
@@ -51,12 +47,6 @@ def run_migrations_offline() -> None:
 
     with context.begin_transaction():
         context.run_migrations()
-
-
-# 🔹 Pega DATABASEURL da env var
-database_url = os.getenv("DATABASE_URL")
-if database_url:
-    config.set_main_option("sqlalchemy.url", database_url)
 
 
 def run_migrations_online() -> None:

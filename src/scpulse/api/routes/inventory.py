@@ -3,10 +3,10 @@ from sqlalchemy.orm import Session
 from datetime import date
 from typing import List, Optional, Sequence
 
-from src.scpulse.storage.models import InventoryAlertsDaily
-from src.scpulse.storage.postgres import get_db
+from src.scpulse.storage.models.entities import InventoryAlertsDaily
+from src.scpulse.storage.postgres import get_session
 from src.scpulse.storage import crud
-from src.scpulse.api.schemas import InventoryAlertOut
+from src.scpulse.api.schemas.schemas import InventoryAlertOut
 
 router = APIRouter(prefix="/inventory", tags=["Inventory"])
 
@@ -16,6 +16,6 @@ def get_inventory_alerts(
     sku: Optional[str] = Query(None),
     start: Optional[date] = Query(None),
     end: Optional[date] = Query(None),
-    db: Session = Depends(get_db),
+    db: Session = Depends(get_session),
 ) -> Sequence[InventoryAlertsDaily]:
     return crud.get_inventory_alerts(db, sku=sku, start=start, end=end)

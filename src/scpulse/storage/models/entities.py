@@ -11,7 +11,7 @@ from sqlalchemy import (
     Index,
     Numeric,
 )
-from .postgres import Base
+from src.scpulse.storage.postgres import Base
 from sqlalchemy.orm import Mapped, mapped_column, relationship
 
 

@@ -6,7 +6,7 @@ from sqlalchemy.orm import Session
 from sqlalchemy import select
 from sqlalchemy.dialects.postgresql import insert
 
-from .models import (
+from .models.entities import (
     Supplier,
     Sku,
     OrdersCreatedDaily,

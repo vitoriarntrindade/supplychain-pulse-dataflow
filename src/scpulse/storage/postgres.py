@@ -1,6 +1,6 @@
 """Configuração de conexão com PostgreSQL."""
 
-from typing import Any, Generator
+from collections.abc import Generator
 
 from sqlalchemy import create_engine, text
 from sqlalchemy.orm import sessionmaker, DeclarativeBase, Session
@@ -21,7 +21,7 @@ engine = create_engine(DATABASE_URL, echo=False, future=True)
 SessionLocal = sessionmaker(bind=engine, autoflush=False, autocommit=False)
 
 
-def get_db() -> Generator[Session, Any, None]:
+def get_session() -> Generator[Session, None, None]:
     """Dependency FastAPI para injetar sessão do banco."""
     db = SessionLocal()
     try:

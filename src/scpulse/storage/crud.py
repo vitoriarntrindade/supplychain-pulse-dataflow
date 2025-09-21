@@ -92,8 +92,11 @@ def save_orders_created(db: Session, rows: Iterable[dict]) -> None:
                     "total_qty": total_qty,
                 },
             )
+            .returning(OrdersCreatedDaily.id)
         )
-        db.execute(stmt)
+        result = db.execute(stmt)
+        inserted_id = result.scalar_one_or_none()
+        print(f"[DEBUG] ✅ Inserido/Atualizado com id = {inserted_id}")
 
 
 # -------------------------------------------

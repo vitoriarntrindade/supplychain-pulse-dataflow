@@ -51,7 +51,7 @@ logs:
 
 # 🐳 Sobe serviços do Docker Compose (Kafka, etc.)
 docker-up:
-	docker compose up -d
+	sudo docker compose up -d
 
 # 🐳 Derruba serviços do Docker Compose
 docker-down:
